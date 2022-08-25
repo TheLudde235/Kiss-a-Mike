@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #333333;
+}
+#game{
+    width: 900px;
+    height: 900px;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+#game-board{
+    border: solid dodgerblue;
+    display: grid;
+    grid-template-areas: "A A A";
+    margin:auto;
+}
+.door{
+    background-image: url("assets/images/mikedoor.jpg");
+    width: 300px;
+    height: 300px;
+    border: solid white;
+}
