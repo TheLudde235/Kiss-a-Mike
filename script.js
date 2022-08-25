@@ -66,7 +66,7 @@ function stopTimer() {
     clearInterval(timer);
 }
 
-let audio;
+let audio = new Audio();
 function resetGame() {
     score = 1;
     scoreTag.innerText = "Score: 0/10";
@@ -81,10 +81,7 @@ function resetGame() {
     {
         document.getElementsByClassName("door")[i].style.backgroundImage = "url(assets/images/mikedoor.jpg)";
     }
-    if (gameIsActive = false)
-    {
-        audio.pause();
-    }
+    audio.pause();
 }
 
 function kissMike(ev) {
