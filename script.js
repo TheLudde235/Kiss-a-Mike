@@ -42,7 +42,6 @@ let door;
 function renderMike() {
     if (document.getElementById(`door-${lastIndex}`).dataset.active == "1")
     {
-        lives--;
         if (lives <= 0)
         {
             lose();
@@ -73,7 +72,6 @@ function resetGame() {
     scoreTag.innerText = "Score: 0/10";
     lives = 3;
     document.getElementById("lives").innerText = "Lives: 3/3";
-    audio.pause();
     gameBoard.style.display = "grid";
     stopTimer();
     gameIsActive = false;
@@ -82,6 +80,10 @@ function resetGame() {
     for (let i = 0; i < document.getElementsByClassName("door").length; i++)
     {
         document.getElementsByClassName("door")[i].style.backgroundImage = "url(assets/images/mikedoor.jpg)";
+    }
+    if (gameIsActive = false)
+    {
+        audio.pause();
     }
 }
 
