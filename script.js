@@ -5,6 +5,7 @@ let score = 1;
 let lives = 3;
 let lastIndex = 0;
 let time = 2000;
+
 gameBoard.onclick = (ev) => {
     if (!gameIsActive) {
         return;
@@ -44,7 +45,7 @@ function renderMike() {
         lives--;
         if (lives <= 0)
         {
-            
+            lose();
         }
         document.getElementById("lives").innerText = `Lives: ${lives}/3`;
         document.getElementById(`door-${lastIndex}`).style.backgroundImage = "url(assets/images/mikedoor.jpg)";
@@ -66,10 +67,12 @@ function stopTimer() {
     clearInterval(timer);
 }
 
-let audio = new Audio("assets/audio/SharingTheNightTogether.mp3");
+let audio;
 function resetGame() {
     score = 1;
     scoreTag.innerText = "Score: 0/10";
+    lives = 3;
+    document.getElementById("lives").innerText = "Lives: 3/3";
     audio.pause();
     gameBoard.style.display = "grid";
     stopTimer();
@@ -82,17 +85,27 @@ function resetGame() {
     }
 }
 
-function kissMike(ev){
+function kissMike(ev) {
     scoreTag.innerText = `Score: ${score++}/10`;
     ev.target.style.backgroundImage = "url(assets/images/mikedoor.jpg)";
     ev.target.dataset.active = "0";
     new Audio(`assets/audio/kiss${getRandom(6)+1}.mp3`).play();
 }
-function win(){
-    audio = new Audio("assets/audio/SharingTheNightTogether.mp3")
+
+function win() {
+    audio = new Audio("assets/audio/SharingTheNightTogether.mp3");
     gameBoard.style.display = "none";
     scoreTag.innerText = "Du vann!";
     stopTimer();
     document.getElementById("game").style.backgroundImage = "url(assets/images/Mike_Ehrmantraut.png)";
+    audio.play();
+}
+
+function lose() {
+    audio = new Audio("assets/audio/waltuh.mp3");
+    document.getElementById("game").style.backgroundImage = "url(assets/images/himler.jpeg)";
+    gameBoard.style.display = "none";
+    stopTimer();
+    scoreTag.innerText = "Du förlorade!";
     audio.play();
 }
