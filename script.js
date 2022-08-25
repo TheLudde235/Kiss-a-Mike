@@ -2,6 +2,7 @@ const gameBoard = document.getElementById("game-board");
 let gameIsActive = false;
 let scoreTag = document.getElementById("score");
 let score = 1;
+let winScore = 15;
 let lives = 3;
 let lastIndex = 0;
 let time = 2000;
@@ -13,7 +14,7 @@ gameBoard.onclick = (ev) => {
     if (ev.target.dataset.active == "1") {
         kissMike(ev);
     }
-    if (score > 10)
+    if (score > winScore)
     {
         win();
     }
@@ -60,17 +61,23 @@ let timer;
 function startTimer() {
     timer = setInterval(() => {
         renderMike();
-    }, time)
+    }, time);
 }
 
 function stopTimer() {
     clearInterval(timer);
 }
 
+function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+        renderMike();
+    }, time);
+}
 let audio = new Audio();
 function resetGame() {
     score = 1;
-    scoreTag.innerText = "Score: 0/10";
+    scoreTag.innerText = `Score: 0/${winScore}`;
     lives = 3;
     document.getElementById("lives").innerText = "Lives: 3/3";
     gameBoard.style.display = "grid";
@@ -86,10 +93,12 @@ function resetGame() {
 }
 
 function kissMike(ev) {
-    scoreTag.innerText = `Score: ${score++}/10`;
+    scoreTag.innerText = `Score: ${score++}/${winScore}`;
     ev.target.style.backgroundImage = "url(assets/images/mikedoor.jpg)";
     ev.target.dataset.active = "0";
     new Audio(`assets/audio/kiss${getRandom(6)+1}.mp3`).play();
+    time = time / 1.1;
+    resetTimer();
 }
 
 function win() {
