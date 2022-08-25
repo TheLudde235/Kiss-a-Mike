@@ -42,6 +42,7 @@ let door;
 function renderMike() {
     if (document.getElementById(`door-${lastIndex}`).dataset.active == "1")
     {
+        lives--;
         if (lives <= 0)
         {
             lose();
