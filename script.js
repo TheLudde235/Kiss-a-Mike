@@ -77,6 +77,7 @@ function resetTimer() {
 let audio = new Audio();
 function resetGame() {
     score = 1;
+    time = 2000;
     scoreTag.innerText = `Score: 0/${winScore}`;
     lives = 3;
     document.getElementById("lives").innerText = "Lives: 3/3";
